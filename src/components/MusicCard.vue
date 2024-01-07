@@ -2,7 +2,7 @@
     <v-expand-transition>
         <v-card
             :color="`${appMap.get(item.platform).color}-darken-4`"
-            class="ma-4"
+            class="ma-4 flex-fill"
             style="transition: background-color 0s;"
             theme="dark"
             v-show="!item.removed"

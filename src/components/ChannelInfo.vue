@@ -1,30 +1,40 @@
 <template>
-    <MusicCard v-if="first" :id="0" :item="first as MusicData"></MusicCard>
-    <div class="w-100" v-else>
-        <v-progress-linear indeterminate="true" :height="8"></v-progress-linear>
-        <br><br>
-        <h5 class="text-h5 text-center font-weight-bold w-100">
-            这个频道没有在播放的音乐
-        </h5>
+    <div class="w-100 d-flex flex-wrap">
+        <div v-if="first" style="flex: 1 0 12em">
+            <PlayingMusicCard
+                :id="0"
+                :item="first as MusicData"
+            ></PlayingMusicCard>
+        </div>
+        <div class="w-100" v-else>
+            <v-progress-linear indeterminate="true" :height="8"></v-progress-linear>
+            <br><br>
+            <h5 class="text-h5 text-center font-weight-bold w-100">
+                这个频道没有在播放的音乐
+            </h5>
+        </div>
+        <div v-if="other.length > 0" class="flex-fill">
+            <draggable
+                v-model="other"
+                tag="v-card"
+                v-bind="dragOptions"
+                style="user-select: none; cursor: move;"
+                @start="dragging = true"
+                @end="dragging = false"
+            >
+                <template #item="{element, index}">
+                    <MusicCard :id="index + 1" :item="element"></MusicCard>
+                </template>
+            </draggable>
+        </div>
     </div>
-    <draggable
-        v-model="other"
-        tag="v-card"
-        v-bind="dragOptions"
-        style="user-select: none; cursor: move;"
-        @start="dragging = true"
-        @end="dragging = false"
-    >
-        <template #item="{element, index}">
-            <MusicCard :id="index + 1" :item="element"></MusicCard>
-        </template>
-    </draggable>
 </template>
 
 <script setup lang="ts">
 import {decodeMusicMap, MusicData} from "@/impl/channel-info";
 import {Ref, toRef, toRefs, watch} from "vue";
 import {useRouter} from "vue-router";
+import PlayingMusicCard from "@/components/PlayingMusicCard.vue";
 
 const props = defineProps<{
     ws: Ref<WebSocket | undefined>

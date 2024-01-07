@@ -1,3 +1,3 @@
 export const config = {
-    api: 'wss://220.161.173.225:12138/websocket'
+    api: 'ws://nat1.rbqcloud.cn:30022/websocket'
 }

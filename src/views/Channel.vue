@@ -1,5 +1,5 @@
 <template>
-    <v-container class="px-6" style="max-width: 32rem">
+    <v-container class="px-4 h-100">
         <ChannelInfo :ws="ws" ref="info"></ChannelInfo>
         <div class="nav-btns">
             <v-tooltip text="拖拽以删除" v-if="$refs?.info?.loaded">

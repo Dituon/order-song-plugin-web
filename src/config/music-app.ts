@@ -10,7 +10,7 @@ interface MusicAppInfo {
 export const musicApps: MusicAppInfo[] = [
     {
         id: MusicApp.M163,
-        name: '网易云',
+        name: '网易云音乐',
         icon: 'mdi-music-circle',
         color: 'red',
     },
