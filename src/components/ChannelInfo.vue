@@ -55,15 +55,11 @@ function getList() {
 
 watch(ws, nv => {
     const ws = nv as WebSocket
-    let timer = 0
     ws.addEventListener('open', () => {
         ws.send(JSON.stringify({
             type: 'ping',
             message: 'pong'
         }))
-    })
-    ws.addEventListener('close', () => {
-        clearInterval(timer)
     })
     ws.addEventListener('message', msg => {
         const raw = JSON.parse(msg.data) as any
@@ -112,7 +108,10 @@ export default {
             animation: 200,
             group: "musicCards",
             disabled: false,
-            ghostClass: "ghost"
+            ghostClass: "ghost",
+            scrollSensitivity: 200,
+            forceFallback: true,
+            scrollSpeed: 16,
         }),
     },
     components: {
