@@ -57,12 +57,10 @@ watch(ws, nv => {
     const ws = nv as WebSocket
     let timer = 0
     ws.addEventListener('open', () => {
-        timer = setInterval(() => {
-            ws.send(JSON.stringify({
-                type: 'ping',
-                message: 'pong'
-            }))
-        }, 5000)
+        ws.send(JSON.stringify({
+            type: 'ping',
+            message: 'pong'
+        }))
     })
     ws.addEventListener('close', () => {
         clearInterval(timer)
@@ -71,6 +69,13 @@ watch(ws, nv => {
         const raw = JSON.parse(msg.data) as any
         if (raw.type === 'error') {
             router.push("/")
+            return
+        }
+        if (raw.type === 'ping') {
+            ws.send(JSON.stringify({
+                type: 'ping',
+                message: 'result'
+            }))
             return
         }
         if (raw.type !== 'getMusicList') return
