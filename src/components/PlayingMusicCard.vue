@@ -119,7 +119,7 @@ export default {
 <style scoped>
 .title {
     line-height: 1.2em !important;
-    font-family: SimSun,serif !important;
+    font-family: KaiTi, "Microsoft YaHei UI" !important;
     font-weight: bold;
     width: 100%;
     display: -webkit-box;

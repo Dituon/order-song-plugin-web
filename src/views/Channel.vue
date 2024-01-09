@@ -12,20 +12,6 @@
                 </template>
             </v-tooltip>
 
-            <v-tooltip text="添加音乐">
-                <template v-slot:activator="{ props }">
-                    <v-btn
-                        v-bind="props"
-                        icon="mdi-plus"
-                        variant="elevated"
-                        size="large"
-                        block="true"
-                        @click="router().push('/start')"
-                    >
-                    </v-btn>
-                </template>
-            </v-tooltip>
-
             <v-tooltip text="保存修改" v-if="$refs.info && $refs.info.loaded">
                 <template v-slot:activator="{ props }">
                     <SaveMusicSortBtn

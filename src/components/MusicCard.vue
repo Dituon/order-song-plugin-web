@@ -13,12 +13,11 @@
                         class="text-wrap pb-0 title"
                     >
                         {{ item.title }}
-                        <v-chip size="small" prepend-icon="mdi-play" v-if="id === 0">正在播放</v-chip>
                     </v-card-title>
 
                     <v-card-subtitle style="margin-top: 0.5rem">{{ item.author }}</v-card-subtitle>
 
-                    <v-card-text>
+                    <v-card-actions>
                         <v-chip variant="outlined" class="my-2">
                             <v-avatar start="true">
                                 <v-img
@@ -31,7 +30,16 @@
                                 #{{ item.sender.senderIdentifyNumber }}
                             </span>
                         </v-chip>
-                    </v-card-text>
+                        <v-btn
+                            icon="mdi-arrow-up"
+                            class="ml-4"
+                            @click="list.map((item,index) => {if(index === id){list.unshift(list.splice(index , 1)[0])}})"
+                        ></v-btn>
+                        <v-btn
+                            icon="mdi-delete-outline"
+                            @click="list.splice(id, 1)"
+                        ></v-btn>
+                    </v-card-actions>
                 </div>
 
                 <v-avatar class="ma-3" size="125" rounded="0">
@@ -49,8 +57,9 @@
 import {MusicData} from "@/impl/channel-info";
 
 const props = defineProps<{
+    list: MusicData[],
     item: MusicData,
-    id: number
+    id: number,
 }>();
 </script>
 

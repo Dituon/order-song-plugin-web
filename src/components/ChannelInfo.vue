@@ -1,6 +1,6 @@
 <template>
     <div class="w-100 d-flex flex-wrap">
-        <div v-if="first" style="flex: 1 0 12em">
+        <div v-if="first" class="playing">
             <PlayingMusicCard
                 :id="0"
                 :item="first as MusicData"
@@ -23,7 +23,7 @@
                 @end="dragging = false"
             >
                 <template #item="{element, index}">
-                    <MusicCard :id="index + 1" :item="element"></MusicCard>
+                    <MusicCard :list="other" :id="index" :item="element"></MusicCard>
                 </template>
             </draggable>
         </div>
@@ -125,5 +125,19 @@ export default {
 <style scoped>
 .ghost {
     opacity: 0.5;
+}
+
+.playing {
+    position: sticky;
+    flex: 1 0 12em;
+    top: 4em;
+    height: 100%;
+}
+
+@media (max-width:870px) {
+    .playing {
+        position: unset;
+        flex: 1 0 12em;
+    }
 }
 </style>
